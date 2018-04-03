@@ -66,7 +66,7 @@ void BaseWindow::init()
         {
             QHBoxLayout *buttonLayout = this->titlebarBox = new QHBoxLayout();
             buttonLayout->setMargin(0);
-            layout->addLayout(buttonLayout);
+            // layout->addLayout(buttonLayout);
 
             // title
             QLabel *title = new QLabel("   Chatterino");
@@ -103,11 +103,13 @@ void BaseWindow::init()
             this->buttons.push_back(_maxButton);
             this->buttons.push_back(_exitButton);
 
+            /*
             buttonLayout->addStretch(1);
             buttonLayout->addWidget(_minButton);
             buttonLayout->addWidget(_maxButton);
             buttonLayout->addWidget(_exitButton);
             buttonLayout->setSpacing(0);
+            */
         }
         this->layoutBase = new BaseWidget(this);
         layout->addWidget(this->layoutBase);
@@ -402,6 +404,7 @@ void BaseWindow::showEvent(QShowEvent *event)
 void BaseWindow::paintEvent(QPaintEvent *event)
 {
     if (this->hasCustomWindowFrame()) {
+        /*
         BaseWidget::paintEvent(event);
 
         QPainter painter(this);
@@ -419,6 +422,7 @@ void BaseWindow::paintEvent(QPaintEvent *event)
         painter.setPen(QPen(QBrush(gradient), 1));
 
         painter.drawRect(0, 0, this->width() - 1, this->height() - 1);
+        */
     }
 }
 #endif

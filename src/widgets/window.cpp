@@ -26,6 +26,8 @@ Window::Window(const QString &windowName, singletons::ThemeManager &_themeManage
     , dpi(this->getScale())
     , notebook(this, _isMainWindow, this->settingRoot)
 {
+    this->setMouseTracking(true);
+
     singletons::AccountManager::getInstance().Twitch.currentUsername.connect(
         [this](const std::string &newUsername, auto) {
             if (newUsername.empty()) {
@@ -125,6 +127,20 @@ Notebook &Window::getNotebook()
 void Window::refreshWindowTitle(const QString &username)
 {
     this->setWindowTitle(username + " - Chatterino for Twitch");
+}
+
+void Window::enterEvent(QEvent *event)
+{
+    debug::Log("ENTER");
+
+    BaseWindow::enterEvent(event);
+}
+
+void Window::leaveEvent(QEvent *event)
+{
+    debug::Log("LEAVE");
+
+    BaseWindow::leaveEvent(event);
 }
 
 void Window::closeEvent(QCloseEvent *)

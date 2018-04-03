@@ -54,6 +54,8 @@ public:
     pajlada::Signals::NoArgSignal closed;
 
 protected:
+    void enterEvent(QEvent *event) override;
+    void leaveEvent(QEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
     bool event(QEvent *event) override;
 

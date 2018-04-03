@@ -6,6 +6,12 @@
 
 #include <cmath>
 
+#ifdef USEWINSDK
+#include <Windows.h>
+
+#include <Dwmapi.h>
+#endif
+
 namespace chatterino {
 namespace singletons {
 
@@ -71,9 +77,17 @@ void ThemeManager::actuallyUpdate(double hue, double multiplier)
     //    QColor tabFg = isLight ? "#000" : "#fff";
     //    this->windowBg = isLight ? "#fff" : getColor(0, sat, 0.9);
     //#else
+#ifdef USEWINSDK
+
+    DWORD color = 0;
+    BOOL opaque = FALSE;
+
+    HRESULT hr = DwmGetColorizationColor(&color, &opaque);
+    this->windowBg = color;
+#endif
     isLightTabs = true;
     QColor tabFg = isLightTabs ? "#000" : "#fff";
-    this->windowBg = "#fff";
+    // this->windowBg = "#fff";
     //#endif
 
     // Ubuntu style
